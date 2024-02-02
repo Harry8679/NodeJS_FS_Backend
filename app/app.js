@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const userRouter = require('../router/user.router');
+const userRouter = require("../router/user.router");
+const { connect } = require("../db/db");
 
 const app = express();
 // use middleware to form our contact for incoming json payloads ONLY!!
@@ -17,7 +18,7 @@ app.get("/", (req, res, next) => {
 });
 
 // routers
-app.use('/users', userRouter);
+app.use("/users", userRouter);
 
 // bad url or error we can handle
 // with middleware
@@ -35,5 +36,7 @@ app.use((error, req, res, next) => {
     },
   });
 });
+
+connect();
 
 module.exports = app;
